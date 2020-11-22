@@ -1,0 +1,5 @@
+glauth:
+        images: glauth
+        ports: 
+          - "3893:3893"
+          - "3894:3894"
