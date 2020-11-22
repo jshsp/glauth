@@ -38,7 +38,6 @@ pipeline {
   }
   agent {
     kubernetes {
-      //label "st2dio"
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
