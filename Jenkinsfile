@@ -32,7 +32,7 @@ pipeline {
     FE_SVC_NAME = "${APP_NAME}"
     CLUSTER = "jenkins-cd"
     CLUSTER_ZONE = "us-east1-b"
-    IMAGE_TAG = localhost:32000/${PROJECT}-${APP_NAME}:${COMMIT}
+    IMAGE_TAG = "localhost:32000/${PROJECT}-${APP_NAME}:${COMMIT}"
     JENKINS_CRED = "${PROJECT}"
     ENVSPACE = "${env.APP_NAME}-${env.BRANCH_NAME}"
   }
