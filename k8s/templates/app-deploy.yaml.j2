@@ -27,7 +27,7 @@ spec:
       containers:
       - volumeMounts:
         - name: {{ env }}-app-cm
-          mountPath: /app/config/mounted/
+          mountPath: /app/config/config.cfg
           subPath: config.cfg
         - name: ssl
           mountPath: "/app/certs/ssl"
