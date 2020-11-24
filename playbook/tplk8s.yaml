@@ -1,0 +1,48 @@
+- hosts: localhost
+  connection: local
+  tasks:
+
+  - name: check for variables
+    stat:
+      path: "{{ basedir }}/k8s/vars"
+    register: stat_result
+
+
+  - name: include found vars
+    include_vars:
+      dir: "{{ basedir }}/k8s/vars/"
+    when: stat_result.stat.exists == True
+
+
+  - name: check if there is a context vars folder
+    stat:
+      path: "{{ basedir }}/k8s/vars/{{env}}/"
+    register: stat_result_context
+
+
+  - name: include context vars
+    include_vars:
+      dir: "{{ basedir }}/k8s/vars/{{env}}/"
+    when: stat_result_context.stat.exists == True
+
+
+
+  # clean out old & make new ws
+  - name: remove tmp dir
+    file:
+      path: "/tmp/glauth-tmp-k8s"
+      state: absent
+
+  - name: cr8 tmp dir
+    file:
+      path: "/tmp/glauth-tmp-k8s"
+      state: directory
+
+
+  - name: mk tmpls
+    template:
+      src: "{{ item }}"
+      dest: "/tmp/glauth-tmp-k8s/{{ item | basename | replace('.j2', '') }}"
+      mode: 0600
+    with_fileglob:
+      - "{{ basedir }}/k8s/templates/*.j2"
