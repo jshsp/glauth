@@ -18,7 +18,8 @@ ENV GOARCH=amd64
 ENV CGO_ENABLED=0
 
 # Only needed for alpine builds
-RUN apk add --no-cache git bzr make
+RUN apk update
+RUN apk add --no-cache git make
 
 # Install deps
 RUN go get -d -v ./...

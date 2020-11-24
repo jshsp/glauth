@@ -1,0 +1,2 @@
+docker run -v $(pwd)/../scripty5/tryb.cfg:/app/config/config.cfg glauth
+
