@@ -7,8 +7,8 @@ deploys:
           
 protos:
   - TCP
-  - UDP
+ # - UDP
   
 portlist:
-  - 3193
-  - 3194
+  - 3893
+  - 3894
