@@ -1,4 +1,14 @@
+application_name: glauth
+buildtag: latest
 deploys:
-        - name: default
-          domain: redskysec.com
-          image: 
+        - name: a0
+          domain: tryb.co.za
+          image: us.gcr.io/bzrlvl/glauth
+          
+protos:
+  - TCP
+  - UDP
+  
+portlist:
+  - 3193
+  - 3194

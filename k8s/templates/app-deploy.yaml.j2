@@ -1,0 +1,41 @@
+{% for appdeploy in deploys %}
+{% set name = appdeploy.name  %}
+{% set image= appdeploy.image  %}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ env }}-{{ name }}
+  name: {{ env }}-{{ name }}
+  namespace: {{application_name}}-{{ env }}
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: {{ env }}-{{ name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ env }}-{{ name }}
+    spec:
+      containers:
+      - volumeMounts:
+        - name: {{ env }}-app-cm
+          mountPath: /app/config/
+          subPath: config.cfg
+        image: {{ image }}:{{buildtag}}
+        imagePullPolicy: Always
+        name: {{ env }}-{{ name }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+{% endfor %}

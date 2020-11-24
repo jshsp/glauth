@@ -1,0 +1,26 @@
+{% for appdeploy in deploys %}
+{% set name = appdeploy.name  %}
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ env }}-{{ name }}-svc
+  namespace: {{application_name}}-{{ env }}
+  
+spec:
+  ports:
+{% for port in portlist %}{% for proto in protos %}
+  - name: {{ env }}-{{ name }}-svc-{{proto |lower}}-{{port}}
+    port: {{port}}
+    protocol: {{proto}}
+    targetPort: {{port}}
+{% endfor %}
+{% endfor %}
+
+
+  selector:
+    app: {{ env }}-{{ name }}
+
+  sessionAffinity: None
+{% endfor %}

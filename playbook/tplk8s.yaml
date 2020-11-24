@@ -4,25 +4,25 @@
 
   - name: check for variables
     stat:
-      path: "{{ basedir }}/k8s/vars"
+      path: "{{ basedir }}/k8s/var"
     register: stat_result
 
 
   - name: include found vars
     include_vars:
-      dir: "{{ basedir }}/k8s/vars/"
+      dir: "{{ basedir }}/k8s/var/"
     when: stat_result.stat.exists == True
 
 
   - name: check if there is a context vars folder
     stat:
-      path: "{{ basedir }}/k8s/vars/{{env}}/"
+      path: "{{ basedir }}/k8s/var/{{env}}/"
     register: stat_result_context
 
 
   - name: include context vars
     include_vars:
-      dir: "{{ basedir }}/k8s/vars/{{env}}/"
+      dir: "{{ basedir }}/k8s/var/{{env}}/"
     when: stat_result_context.stat.exists == True
 
 

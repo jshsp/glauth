@@ -3,3 +3,9 @@ tpl:
 
 bp:
 	bash scripty5/buildpush
+
+apply:
+	kubectl apply -f /tmp/glauth-tmp-k8s/
+
+do:
+	make tpl bp apply
