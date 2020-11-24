@@ -27,8 +27,11 @@ spec:
       containers:
       - volumeMounts:
         - name: {{ env }}-app-cm
-          mountPath: /app/config/
+          mountPath: /app/config/mounted/
           subPath: config.cfg
+        - name: ssl
+          mountPath: "/app/certs/ssl"
+          readOnly: true
         image: {{ image }}:{{buildtag}}
         imagePullPolicy: Always
         name: {{ env }}-{{ name }}
@@ -38,4 +41,13 @@ spec:
       securityContext:
         fsGroup: 1000
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: {{ env }}-app-cm
+        configMap:
+          name: {{ env }}-app-cm
+          defaultMode: 0550
+      - name: ssl
+        secret:
+          secretName: {{ env}}-ssl 
+          defaultMode: 0550
 {% endfor %}

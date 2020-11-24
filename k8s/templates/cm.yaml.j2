@@ -37,8 +37,8 @@ data:
     [ldaps]
     enabled = true
     listen = "0.0.0.0:3894"
-    cert = "certs/server.crt"
-    key = "certs/server.key"
+    cert = "/app/certs/server.crt"
+    key = "/app/certs/server.key"
 
     #################
     # The backend section controls the data store.
@@ -115,7 +115,7 @@ data:
     #################
     # Enable and configure the optional REST API here.
     [api]
-    enabled = true
+    enabled = false
     tls = false # enable TLS for production!!
     listen = "0.0.0.0:5555"
     cert = "cert.pem"

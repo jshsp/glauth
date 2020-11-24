@@ -38,7 +38,7 @@ FROM alpine as run
 MAINTAINER Ben Yanke <ben@benyanke.com>
 
 # Copies a sample config to be used if a volume isn't mounted with user's config
-ADD sample-simple.cfg /app/config/config.cfg
+#ADD sample-simple.cfg /app/config/config.cfg
 
 # Copy binary from build container
 COPY --from=build /app/glauth /app/glauth
