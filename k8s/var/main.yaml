@@ -1,0 +1,4 @@
+deploys:
+        - name: default
+          domain: redskysec.com
+          image: 
