@@ -34,3 +34,5 @@ if [ ! -f /app/config/config.cfg ] ; then
   echo "Copying example configuration file to run."
   dorun /app/docker/default-config.cfg  || exit 1
  fi
+
+ dorun /app/config/config.cfg 

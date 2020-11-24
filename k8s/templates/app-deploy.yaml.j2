@@ -30,7 +30,7 @@ spec:
           mountPath: /app/config/config.cfg
           subPath: config.cfg
         - name: ssl
-          mountPath: "/app/certs/ssl"
+          mountPath: "/app/certs/"
           readOnly: true
         image: {{ image }}:{{buildtag}}
         imagePullPolicy: Always
