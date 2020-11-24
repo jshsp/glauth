@@ -1,0 +1,3 @@
+img=us.gcr.io/bzrlvl/glauth:latest
+docker build -t $img src
+docker push $img
